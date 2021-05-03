@@ -14,4 +14,4 @@ First line contain the  'p cnf <no of variables>  <no of lines>'
 All variable has a unique no and not is signify by the negative sign
   
 run programme using
-$ python3 Dpll.py  <data input file name> 
+>> python3 Dpll.py  <data input file name> 
