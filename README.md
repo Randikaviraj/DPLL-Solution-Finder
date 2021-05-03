@@ -10,7 +10,7 @@ p cnf 3  5
 2
 3
  
-First line contain the  'p cnf <<no of variables>>  <<no of lines>>'
+First line contain the  'p cnf "<no of variables>"  "<no of lines>"
 All variable has a unique no and not is signify by the negative sign
   
 run programme using
