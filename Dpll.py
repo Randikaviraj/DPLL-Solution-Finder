@@ -24,8 +24,6 @@ if __name__ =="__main__":
             seconds = seconds-time.time()
             print('Finished::')
             print('Running Time in second'+str(seconds))
-            print(dplE.getNoOfVariables())
-            print(dplE.getExpression())
     except Exception as e:
         print(e)
         print('Invalid no of Arguments :: python Dpll.py <filename>')

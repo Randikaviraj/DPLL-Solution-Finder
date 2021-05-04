@@ -36,10 +36,10 @@ def removeClausesContainingTrueLiterals(expression:DpllExpression,partialArgumen
         return
     for closure in expression.getExpression():
         for literal in closure:
-            if literal>0 and partialArgument[1]:
+            if literal>0 and partialArgument[1] and abs(literal)==partialArgument[0]:
                 expression.getExpression().remove(closure)
                 break
-            elif literal < 0 and not(partialArgument[1]):
+            elif literal < 0 and not(partialArgument[1]) and abs(literal)==partialArgument[0]:
                 expression.getExpression().remove(closure)
                 break
     
@@ -50,12 +50,12 @@ def shortenClosuresNotLiterals(expression:DpllExpression,partialArgument):
         return
     for closure in expression.getExpression():
         for literal in closure:
-            if literal>0 and not(partialArgument[1]):
+            if literal>0 and not(partialArgument[1]) and abs(literal)==partialArgument[0]:
                 expression.getExpression().remove(closure)
                 closure.remove(literal)
                 expression.getExpression().append(closure)
                 
-            elif literal < 0 and partialArgument[1]:
+            elif literal < 0 and partialArgument[1] and abs(literal)==partialArgument[0]:
                 expression.getExpression().remove(closure)
                 closure.remove(literal)
                 expression.getExpression().append(closure)
@@ -91,6 +91,9 @@ def choseVariable(expression:DpllExpression)-> int:
             
      
 def dpllAlgorithm(expression:DpllExpression,partialArgument):
+    print(expression.getExpression())
+    print(expression.checkedVariables)
+    print(expression.getNoOfVariables())
     removeClausesContainingTrueLiterals(expression,partialArgument)
     if len(expression.getExpression())==0:
         return True
@@ -105,7 +108,7 @@ def dpllAlgorithm(expression:DpllExpression,partialArgument):
         return dpllAlgorithm(expression,(literal,literalValue))
         
     value=choseVariable(expression)
-    print(value)
+    
     if dpllAlgorithm(expression,(value,False)):
         return True
     
