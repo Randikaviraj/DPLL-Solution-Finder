@@ -6,14 +6,13 @@ import time
 
 
 if __name__ =="__main__":
-    
     try:
         dplE=DpllExpression()
         with open(sys.argv[1],"r") as file:
             print(f"{sys.argv[1]} Reading..")
             line=file.readline()
             noOfVariables=line.split(" ")[2]
-            dplE.setNoOfVariables(noOfVariables)
+            dplE.setNoOfVariables(int(noOfVariables))
             line=file.readline()
             while line:
                 list=line.split(" ")
@@ -25,6 +24,8 @@ if __name__ =="__main__":
             seconds = seconds-time.time()
             print('Finished::')
             print('Running Time in second'+str(seconds))
+            print(dplE.getNoOfVariables())
+            print(dplE.getExpression())
     except Exception as e:
         print(e)
         print('Invalid no of Arguments :: python Dpll.py <filename>')

@@ -1,11 +1,9 @@
-
-
 class DpllExpression:
     
     def __init__(self):
         self.noOfVariables=0
         self.checkedVariables=[]
-        self.expression=[[]]
+        self.expression=[]
         
     def addCheckedVarible(self,value:int):
         self.checkedVariables.append(value)
@@ -26,7 +24,11 @@ class DpllExpression:
         closure=[]
         for item in expression:
             item=item.strip('\n')
-            closure.append(item)
+            if item:
+                val=int(item)
+                if val==0:
+                  break
+                closure.append(val)
         self.expression.append(closure)
 
 def removeClausesContainingTrueLiterals(expression:DpllExpression,partialArgument):
@@ -36,8 +38,11 @@ def removeClausesContainingTrueLiterals(expression:DpllExpression,partialArgumen
         for literal in closure:
             if literal>0 and partialArgument[1]:
                 expression.getExpression().remove(closure)
+                break
             elif literal < 0 and not(partialArgument[1]):
                 expression.getExpression().remove(closure)
+                break
+    
                 
                 
 def shortenClosuresNotLiterals(expression:DpllExpression,partialArgument):
@@ -54,6 +59,7 @@ def shortenClosuresNotLiterals(expression:DpllExpression,partialArgument):
                 expression.getExpression().remove(closure)
                 closure.remove(literal)
                 expression.getExpression().append(closure)
+
        
             
 def checkEmptyClosure(expression:DpllExpression)-> bool:
@@ -94,17 +100,16 @@ def dpllAlgorithm(expression:DpllExpression,partialArgument):
         return False
     
     containUnitClosure,literal,literalValue=checkUnitLiteral(expression)
-    
     if containUnitClosure:
         expression.addCheckedVarible(literal)
-        dpllAlgorithm(expression,(literal,literalValue))
+        return dpllAlgorithm(expression,(literal,literalValue))
         
     value=choseVariable(expression)
-    
+    print(value)
     if dpllAlgorithm(expression,(value,False)):
         return True
     
-    return dpllAlgorithm(expression,(value,False))
+    return dpllAlgorithm(expression,(value,True))
         
     
     
