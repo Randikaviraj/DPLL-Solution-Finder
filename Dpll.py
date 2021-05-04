@@ -1,26 +1,7 @@
+from Dpllfunc import dpllAlgorithm,DpllExpression
 import sys
+import time
 
-
-class DpllExpression:
-    
-    def __init__(self):
-        self.noOfVariables=0
-        self.expression=[[]]
-        
-    def setNoOfVariables(self,value):
-        self.noOfVariables=value
-        
-    def getNoOfVariables(self)-> int:
-        return self.noOfVariables
-    
-    def stringToDpllInputConveter(self,expression: list):
-        closure=[]
-        for item in expression:
-            item=item.strip('\n')
-            closure.append(item)
-        self.expression.append(closure)
-              
-         
 
 
 
@@ -38,6 +19,12 @@ if __name__ =="__main__":
                 list=line.split(" ")
                 dplE.stringToDpllInputConveter(list)
                 line=file.readline()
+            print('Algorithm Started::')
+            seconds = time.time()
+            print('Answer to SAT problem :'+str(dpllAlgorithm(dplE,tuple())))
+            seconds = seconds-time.time()
+            print('Finished::')
+            print('Running Time in second'+str(seconds))
     except Exception as e:
         print(e)
         print('Invalid no of Arguments :: python Dpll.py <filename>')
